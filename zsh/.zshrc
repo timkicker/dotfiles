@@ -73,3 +73,6 @@ export TERMINAL_CMD="kitty"
 ###############################################################################
 # End of file
 ###############################################################################
+export DEVKITPRO=/opt/devkitpro
+export DEVKITPPC=$DEVKITPRO/devkitPPC
+export PATH=$DEVKITPRO/tools/bin:$DEVKITPPC/bin:$PATH

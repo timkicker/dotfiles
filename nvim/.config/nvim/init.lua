@@ -6,7 +6,7 @@
 local C = {
   red    = "#a14040",
   green  = "#6aaa64",
-  orange = "#df970d",      -- Normal mode / accents
+  orange = "#df970d",      -- Insert mode / syntax accent
   pink   = "#b16286",
   fg     = "#bec1bf",
   bg     = "#2a2a2a",      -- Dark background (not absolute black)
@@ -194,8 +194,8 @@ require("lazy").setup({
   { "nvim-lualine/lualine.nvim",
     config = function()
       local theme = {
-        normal   = { a = { fg="#000000", bg=C.orange, gui="bold" }, c = { fg=C.fg, bg=C.bg2 } },
-        insert   = { a = { fg="#000000", bg=C.green , gui="bold" } },
+        normal   = { a = { fg="#000000", bg=C.green , gui="bold" }, c = { fg=C.fg, bg=C.bg2 } },
+        insert   = { a = { fg="#000000", bg=C.orange, gui="bold" } },
         visual   = { a = { fg="#000000", bg=C.pink  , gui="bold" } },
         replace  = { a = { fg="#000000", bg=C.red   , gui="bold" } },
         command  = { a = { fg="#000000", bg=C.red   , gui="bold" } },

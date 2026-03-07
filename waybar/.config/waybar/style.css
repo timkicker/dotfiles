@@ -1,8 +1,9 @@
 @define-color bg        #222222;  /* darker background */
 @define-color bg_alt    #2a2a2a;  /* slightly lighter for focus */
 @define-color fg        #bec1bf;  /* text */
-@define-color accent    #df970d;  /* orange/red */
+/*@define-color accent    #df970d; */ /* orange/red */
 @define-color green     #6aaa64;
+@define-color accent     #6aaa64;
 @define-color pink      #b16286;
 @define-color red       #df970d;
 @define-color border    #222222;

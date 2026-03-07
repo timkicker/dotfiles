@@ -6,6 +6,15 @@
 
 seat seat0 xcursor_theme macOS-White 24
 set $mod Mod4
+set $lock swaylock -f \
+  --color 222222 \
+  --indicator --indicator-radius 110 --indicator-thickness 8 \
+  --inside-color 2a2a2aff --ring-color 6aaa64ff --text-color bec1bfff \
+  --line-color 00000000 --separator-color 00000000 \
+  --key-hl-color 6aaa64ff --bs-hl-color 6aaa64ff \
+  --inside-ver-color 2a2a2aff --ring-ver-color 6aaa64ff \
+  --inside-clear-color 2a2a2aff --ring-clear-color 6aaa64ff \
+  --inside-wrong-color a14040ff --ring-wrong-color a14040ff
 
 # ---------------- Keyboard ----------------
 input * {
@@ -27,29 +36,29 @@ font pango:monospace 8
 
 # ---------------- Autostart ----------------
 # Waybar: beim Reload zuerst killen, dann neu starten
-exec_always --no-startup-id sh -c 'pkill -x waybar; waybar'
+exec_always sh -c 'pkill -x waybar; waybar &'
 
 # Wallpaper (Waypaper)
-exec_always --no-startup-id waypaper --restore
+exec_always waypaper --restore
 
 # Netzwerk-Applet (falls du das Tray-Icon willst)
-exec --no-startup-id nm-applet
+exec nm-applet
 
 # XDG-Autostarts
-exec --no-startup-id dex -a -e sway
+exec dex -a -e sway
 
 # Profile (Dock/Monitor-Layouts) – kanshi (wenn genutzt)
 # exec_always --no-startup-id kanshi
 
 # Idle + Lock + DPMS
-exec_always --no-startup-id swayidle -w \
-  timeout 300 'swaylock -f -c 000000' \
+exec_always pkill swayidle; swayidle -w \
+  timeout 300 '$lock' \
   timeout 600 'swaymsg "output * dpms off"' \
   resume  'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -f -c 000000'
+  before-sleep '$lock'
 
 # PolicyKit (GENAU EIN Agent!)
-exec --no-startup-id /usr/bin/lxqt-policykit-agent
+exec /usr/bin/lxqt-policykit-agent
 
 # Udiskie (optional: automount)
 # exec --no-startup-id udiskie --smart-tray --notify
@@ -59,17 +68,17 @@ exec --no-startup-id /usr/bin/lxqt-policykit-agent
 # exec_always --no-startup-id mako
 
 # display guard: player dispables Idle
-exec_always --no-startup-id ~/.local/bin/idle-guard
+exec_always ~/.local/bin/idle-guard
 
 # Portals-Umgebung setzen & NUR wlr neu starten
-exec_always --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec_always --no-startup-id systemctl --user restart xdg-desktop-portal-wlr
+exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user restart xdg-desktop-portal-wlr
 
 # Adaptive sync global
 output * adaptive_sync enabled
 
 # JetBrains Lockfile-Aufräumer (wie bei dir)
-exec --no-startup-id sh -c 'rm -rf ~/.var/app/com.jetbrains.IntelliJ-IDEA-Community/config/JetBrains/IdeaIC2024.1/.lock || true'
+exec sh -c 'rm -f ~/.var/app/com.jetbrains.IntelliJ-IDEA-Community/config/JetBrains/IdeaIC*/.lock'
 
 # ---------------- Keybinds ----------------
 # Terminal & Launcher
@@ -136,9 +145,8 @@ bindcode $mod+Shift+17 move container to workspace number $ws8
 bindcode $mod+Shift+18 move container to workspace number $ws9
 bindcode $mod+Shift+19 move container to workspace number $ws10
 
-# Reload/Restart/Exit
+# Reload/Exit
 bindsym $mod+r reload
-bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -b 'Yes' 'swaymsg exit'
 
 # Resize mode on Alt+Mod+r
@@ -157,7 +165,7 @@ mode "resize" {
 bindsym $mod+Mod1+r mode "resize"
 
 # Manual lock
-bindsym Control+Mod1+l exec "swaylock -f -c 000000"
+bindsym Control+Mod1+l exec $lock
 
 # Brightness
 bindsym XF86MonBrightnessUp   exec brightnessctl set +10%
@@ -178,16 +186,8 @@ bindsym $mod+e exec kitty -e ranger
 # Cheatsheets
 bindsym $mod+h exec ~/.local/bin/cheatsheets-rofi
 
-# Swaylock ($mod + Escape) – deine Farben
-bindsym $mod+Escape exec swaylock -f \
-  --color 222222 \
-  --indicator --indicator-radius 110 --indicator-thickness 8 \
-  --inside-color 2a2a2aff --ring-color df970dff --text-color bec1bfff \
-  --line-color 00000000 --separator-color 00000000 \
-  --key-hl-color a14040ff --bs-hl-color a14040ff \
-  --inside-ver-color 2a2a2aff --ring-ver-color df970dff \
-  --inside-clear-color 2a2a2aff --ring-clear-color df970dff \
-  --inside-wrong-color a14040ff --ring-wrong-color a14040ff
+# Swaylock ($mod + Escape)
+bindsym $mod+Escape exec $lock
 
 # ---------------- Chrome/Client Deko ----------------
 default_border normal 2

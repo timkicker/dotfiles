@@ -1,0 +1,13 @@
+[Unit]
+Description=Feed host webcam into v4l2loopback for Waydroid
+After=default.target
+
+[Service]
+ExecStart=/usr/bin/ffmpeg -f v4l2 -input_format mjpeg -framerate 30 -video_size 1280x720 -i /dev/video0 \
+  -vf format=yuv420p,scale=640:480 -pix_fmt yuv420p -f v4l2 /dev/video10 -nostdin -loglevel warning
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
+
