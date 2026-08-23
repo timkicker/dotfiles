@@ -1,0 +1,127 @@
+/* swaync theme — angeglichen an Waybar (bg #222222, fg #bec1bf, accent #6aaa64, red #a14040) */
+
+@define-color bg        #222222;
+@define-color bg_alt    #2a2a2a;
+@define-color bg_hover  #333333;
+@define-color fg        #bec1bf;
+@define-color accent    #6aaa64;
+@define-color red       #a14040;
+@define-color border    #333333;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+}
+
+/* Einzelne Popup-Notification */
+.notification {
+  background: @bg;
+  border: 1px solid @border;
+  border-radius: 0;
+  margin: 6px 8px;
+  padding: 0;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 8px;
+  color: @fg;
+}
+
+.notification-row {
+  background: transparent;
+}
+
+.close-button {
+  background: transparent;
+  color: @fg;
+  border-radius: 0;
+  margin: 4px;
+  padding: 0 6px;
+}
+.close-button:hover {
+  background: @red;
+  color: #000000;
+}
+
+.summary {
+  color: @fg;
+  font-weight: bold;
+}
+.body {
+  color: @fg;
+}
+.time {
+  color: @accent;
+  font-size: 11px;
+}
+
+.critical {
+  border: 1px solid @red;
+}
+
+/* Action-Buttons in Notifications */
+.notification-action {
+  background: @bg_alt;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 0;
+  margin: 4px;
+}
+.notification-action:hover {
+  background: @bg_hover;
+  color: @accent;
+}
+
+/* --- Control Center (das ausklappbare Panel) --- */
+.control-center {
+  background: @bg;
+  border: 1px solid @border;
+  border-radius: 0;
+  padding: 10px;
+}
+
+.control-center .notification {
+  margin: 6px 0;
+}
+
+.widget-title {
+  color: @fg;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 6px 4px 10px 4px;
+}
+.widget-title > button {
+  background: @bg_alt;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 0;
+  padding: 2px 10px;
+}
+.widget-title > button:hover {
+  background: @red;
+  color: #000000;
+}
+
+/* DND-Schalter im Panel */
+.widget-dnd {
+  color: @fg;
+  margin: 4px;
+  font-size: 13px;
+}
+.widget-dnd > switch {
+  background: @bg_hover;
+  border-radius: 0;
+}
+.widget-dnd > switch:checked {
+  background: @accent;
+}
+.widget-dnd > switch slider {
+  background: @fg;
+  border-radius: 0;
+}
+
+/* Leerer Zustand */
+.notification-group-empty {
+  color: @border;
+}
