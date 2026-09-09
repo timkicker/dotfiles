@@ -1,17 +1,18 @@
-@define-color bg        #222222;  /* darker background */
-@define-color bg_alt    #2a2a2a;  /* slightly lighter for focus */
-@define-color fg        #bec1bf;  /* text */
-/*@define-color accent    #df970d; */ /* orange/red */
+@define-color bg        #222222;
+@define-color bg_alt    #2a2a2a;
+@define-color fg        #bec1bf;
 @define-color green     #6aaa64;
-@define-color accent     #6aaa64;
+@define-color accent    #6aaa64;
 @define-color pink      #b16286;
 @define-color red       #a14040;
+@define-color orange    #df970d;
 @define-color border    #222222;
+@define-color sep       #333333;
 
 * {
-  font-family: monospace;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
   font-size: 12px;
-  color: @foreground;
+  color: @fg;
 }
 
 window#waybar {
@@ -33,112 +34,98 @@ button {
   background: @bg_alt;
   box-shadow: inset 0 -2px @accent;
 }
-#workspaces button.urgent {
-  background: @red;
-  color: #000000;
-}
+#workspaces button.urgent { background: @red; color: #000000; }
 #workspaces { margin: 0 4px; }
 #window {
-  border-left: 1px solid #333333;
+  border-left: 1px solid @sep;
   margin-left: -8px;
   padding-left: 6px;
 }
 
-/* Module spacing */
-#tray, #clock, #cpu, #memory, #temperature, #network, #battery, #backlight,
-#pulseaudio, #idle_inhibitor, #power-profiles-daemon, #custom-claude-code,
-#custom-lid-inhibit, #custom-notification {
+/* Einheitliches Padding aller rechten Module */
+#mpris, #custom-fan, #cpu, #memory, #temperature, #backlight, #pulseaudio,
+#custom-peripherals, #custom-bluetooth, #network, #custom-updates, #disk,
+#power-profiles-daemon, #battery, #language, #custom-weather, #clock, #tray,
+#idle_inhibitor, #custom-lid-inhibit, #custom-notification, #custom-power {
+  padding: 0 6px;
+}
+
+/* Cluster: je ein dezenter Trennstrich vor Gruppenanfang */
+#custom-fan,
+#backlight,
+#power-profiles-daemon,
+#language,
+#clock,
+#tray,
+#custom-power {
+  border-left: 1px solid @sep;
+  margin-left: 3px;
+  padding-left: 8px;
+}
+
+/* Toggles-Gruppe: Trennstrich links + rechts (in sich geschlossen) */
+#toggles {
+  border-left: 1px solid @sep;
+  border-right: 1px solid @sep;
+  margin: 0 3px;
   padding: 0 4px;
 }
+#toggles widget:not(:first-child) > * { padding-left: 4px; }
 
-/* Hardware group */
-#hardware {
-  padding: 0;
-}
-#hardware #cpu,
-#hardware #memory,
-#hardware #temperature {
-  padding: 0 2px;
-  transition: all 0.3s ease;
-}
+/* Hardware-Drawer */
+#hardware { padding: 0 2px; }
+#temperature, #cpu, #memory { padding: 0 4px; transition: all 0.25s ease; }
 
-/* Group separators — subtle border-left on first module of each group */
-#idle_inhibitor,
-#network,
-#hardware,
-#backlight,
-#battery,
-#tray {
-  border-left: 1px solid #333333;
-  margin-left: 4px;
-  padding-left: 6px;
-}
-/* idle_inhibitor also gets a right separator */
-#idle_inhibitor {
-  border-right: 1px solid #333333;
-  margin-right: 4px;
-  padding-right: 12px;
-}
+/* rechter Rand */
+.modules-right { margin-right: 6px; }
 
-/* Right edge padding */
-.modules-right {
-  margin-right: 6px;
-}
+/* feste Mindestbreiten gegen Layout-Springen */
+#cpu, #memory, #temperature, #network, #battery, #pulseaudio,
+#backlight, #disk, #custom-fan { min-width: 40px; }
+#language { min-width: 22px; }
+#clock { min-width: 48px; }
 
-/* Fixed widths to prevent layout shift */
-#cpu,
-#memory,
-#temperature,
-#network,
-#battery,
-#pulseaudio,
-#backlight {
-  min-width: 42px;
-}
-#language {
-  min-width: 24px;
-}
-
-/* States */
+/* ---------- States ---------- */
 #pulseaudio.muted { color: @pink; }
-#network.disconnected { color: @accent; }
-#battery.warning    { color: #df970d; }
-#battery.critical   { color: @red; }
-#cpu.warning        { color: #df970d; }
-#cpu.critical       { color: @red; }
-#memory.warning     { color: #df970d; }
-#memory.critical    { color: @red; }
+#network.disconnected { color: @red; }
+#battery.warning  { color: @orange; }
+#battery.critical { color: @red; }
+#cpu.warning, #memory.warning { color: @orange; }
+#cpu.critical, #memory.critical { color: @red; }
 #temperature.critical { color: @red; }
+
+/* Lüfter: grün wenn leise, orange wenn laut/aggressiv */
+#custom-fan.quiet { color: @accent; }
+#custom-fan.loud  { color: @orange; }
+
+/* Peripherie-Akku */
+#custom-peripherals.warning  { color: @orange; }
+#custom-peripherals.critical { color: @red; }
+
+/* Updates */
+#custom-updates.pending { color: @accent; }
+#custom-updates.many    { color: @orange; }
+
+/* Disk */
+#disk.warning  { color: @orange; }
+#disk.critical { color: @red; }
+
+/* Bluetooth verbunden */
+#custom-bluetooth.connected { color: @accent; }
+
+/* Lid-Suspend-Inhibitor: grün wenn aktiv */
+#custom-lid-inhibit.active { color: @accent; }
+
+/* Notification-Center: rot bei Do-Not-Disturb */
+#custom-notification.dnd-none,
+#custom-notification.dnd-notification,
+#custom-notification.dnd-inhibited-none,
+#custom-notification.dnd-inhibited-notification { color: @red; }
 
 /* Tooltip */
 tooltip {
   background: @bg;
   color: @fg;
-  border: 1px solid @border;
+  border: 1px solid @sep;
 }
-
-
-/* Claude Code module */
-#custom-claude-code.active {
-  color: @accent;
-}
-
-#custom-power,
-#custom-lid-inhibit,
-#custom-notification {
-  font-family: "Symbols Nerd Font", "Symbols Nerd Font Mono", "JetBrainsMono Nerd Font", monospace;
-}
-
-/* Lid-Suspend-Inhibitor: grün wenn aktiv (Laptop bleibt beim Zuklappen an) */
-#custom-lid-inhibit.active {
-  color: @accent;
-}
-
-/* Notification-Center: rot wenn Do-Not-Disturb aktiv */
-#custom-notification.dnd-none,
-#custom-notification.dnd-notification,
-#custom-notification.dnd-inhibited-none,
-#custom-notification.dnd-inhibited-notification {
-  color: @red;
-}
-
+tooltip label { color: @fg; }

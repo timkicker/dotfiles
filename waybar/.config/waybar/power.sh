@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # simple power menu
-wlogout --css ~/.config/wlogout/style.css --layout ~/.config/wlogout/layout -p layer-shell -b 5 -c 0 -T 200 -R 200
+wlogout --css ~/.config/wlogout/style.css --layout ~/.config/wlogout/layout -p layer-shell -b 3 -c 5 -r 5 -T 400 -B 400 -L 400 -R 400
