@@ -4,15 +4,15 @@
 }
 
 window {
-	background-color: rgba(12, 12, 12, 0.9);
+	background-color: rgba(34, 34, 34, 0.9);
 }
 
 button {
     border-radius: 0;
-    border-color: black;
-	text-decoration-color: #FFFFFF;
-    color: #FFFFFF;
-	background-color: #1E1E1E;
+    border-color: #333333;
+	text-decoration-color: #bec1bf;
+    color: #bec1bf;
+	background-color: #2a2a2a;
 	border-style: solid;
 	border-width: 1px;
 	background-repeat: no-repeat;
@@ -21,37 +21,15 @@ button {
 }
 
 button:focus, button:active, button:hover {
-	background-color: #df970d;
+	background-color: #6aaa64;
+	color: #000000;
 	outline-style: none;
 }
 
-#lock {
-    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
-}
-
-#logout {
-    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
-}
-
-#suspend {
-    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
-}
-
-#hibernate {
-    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
-}
-
-#shutdown {
-    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
-}
-
-#reboot {
-    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
-}
-
-/* Icons für die neuen Einträge */
-#firmware       { background-image: -gtk-icontheme("system-run-symbolic"); }
-#sway-reload    { background-image: -gtk-icontheme("view-refresh-symbolic"); }
-#waybar-restart { background-image: -gtk-icontheme("view-refresh-symbolic"); }
-#audio-restart  { background-image: -gtk-icontheme("audio-volume-high-symbolic"); }
+#lock            { background-image: -gtk-icontheme("system-lock-screen-symbolic"); }
+#logout          { background-image: -gtk-icontheme("system-log-out-symbolic"); }
+#suspend         { background-image: -gtk-icontheme("system-suspend-symbolic"); }
+#shutdown        { background-image: -gtk-icontheme("system-shutdown-symbolic"); }
+#reboot          { background-image: -gtk-icontheme("system-reboot-symbolic"); }
+#sway-reload     { background-image: -gtk-icontheme("view-refresh-symbolic"); }
 

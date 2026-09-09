@@ -1,0 +1,14 @@
+[Unit]
+Description=slskd (user-mode)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.local/share/slskd
+Environment=SLSKD_APP_DIR=%h/.local/share/slskd
+ExecStart=/usr/bin/slskd
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

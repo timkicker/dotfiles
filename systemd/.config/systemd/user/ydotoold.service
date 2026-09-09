@@ -1,0 +1,12 @@
+[Unit]
+Description=ydotool daemon (user) — virtuelle Eingabe für Automation/Skript-Klicks
+Documentation=man:ydotoold(8)
+
+[Service]
+# /dev/uinput ist per logind-ACL für den User schreibbar → kein root nötig.
+ExecStart=/usr/bin/ydotoold --socket-path=%t/.ydotool_socket --socket-own=%U:%U
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target

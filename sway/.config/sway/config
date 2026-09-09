@@ -147,7 +147,7 @@ bindcode $mod+Shift+19 move container to workspace number $ws10
 
 # Reload/Exit
 bindsym $mod+r reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -b 'Yes' 'swaymsg exit'
+bindsym $mod+Shift+e exec ~/.config/waybar/power.sh
 
 # Resize mode on Alt+Mod+r
 mode "resize" {
@@ -195,6 +195,11 @@ default_floating_border normal 2
 titlebar_padding 4 2
 titlebar_border_thickness 1
 hide_edge_borders smart
+
+# Titlebar-Anzeigenamen
+for_window [app_id="kitty"]   title_format "Kitty"
+for_window [app_id="firefox"] title_format "Firefox"
+for_window [app_id="zen"]     title_format "Zen"
 
 # Farben (wie gehabt)
 client.focused          #3a3a3a  #2a2a2a  #bec1bf  #3a3a3a   #3a3a3a

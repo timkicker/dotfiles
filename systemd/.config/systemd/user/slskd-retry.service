@@ -1,0 +1,10 @@
+[Unit]
+Description=Retry failed slskd downloads
+After=slskd.service
+Requires=slskd.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/slskd-retry.py
+StandardOutput=journal
+StandardError=journal

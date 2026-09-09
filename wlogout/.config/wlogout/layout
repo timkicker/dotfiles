@@ -5,12 +5,6 @@
     "keybind" : "l"
 }
 {
-    "label" : "hibernate",
-    "action" : "systemctl hibernate",
-    "text" : "Hibernate",
-    "keybind" : "h"
-}
-{
     "label" : "logout",
     "action" : "loginctl terminate-user $USER",
     "text" : "Logout",
@@ -34,7 +28,4 @@
     "text" : "Reboot",
     "keybind" : "r"
 }
-{ "label": "firmware",       "text": "Firmware",      "action": "systemctl reboot --firmware-setup",                          "keybind": "F" }
-{ "label": "sway-reload",    "text": "Reload Sway",   "action": "swaymsg reload",                                             "keybind": "R" }
-{ "label": "waybar-restart", "text": "Restart Waybar","action": "bash -lc 'pkill waybar; nohup waybar >/dev/null 2>&1 &'",    "keybind": "W" }
-{ "label": "audio-restart",  "text": "Restart Audio", "action": "systemctl --user restart wireplumber pipewire pipewire-pulse","keybind": "A" }
+{ "label": "sway-reload", "text": "Reload Sway", "action": "swaymsg reload", "keybind": "R" }

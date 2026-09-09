@@ -1,6 +1,14 @@
+# RECONSTRUCTED 2026-08-13. The original was overwritten and deleted by mistake
+# while testing systemd user-unit name precedence. What the journal proves about
+# it: the name, the Description below (verbatim from "Starting ..." lines), and
+# that it was oneshot (it "Finished" rather than staying active), triggered by
+# arch-update.timer on Mon 09:00, running 0.5-1.3s CPU at 70-90M peak - which is
+# what checkupdates costs. The ExecStart is a RECONSTRUCTION from that shape, not
+# a recovery: the original command left no trace in the journal, shell history or
+# any backup. Correct it if it differed.
 [Unit]
 Description=Notify about available Arch updates
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/bin/arch-update-notify
+ExecStart=/bin/sh -c 'n=$(checkupdates | wc -l); [ "$n" -gt 0 ] && notify-send "Arch updates" "$n package(s) can be updated" || true'
