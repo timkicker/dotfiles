@@ -36,7 +36,7 @@ font pango:monospace 8
 
 # ---------------- Autostart ----------------
 # Waybar: beim Reload zuerst killen, dann neu starten
-exec_always sh -c 'pkill -x waybar; waybar &'
+exec_always sh -c 'pkill -x waybar; setsid -f waybar >/dev/null 2>&1'
 
 # Wallpaper (Waypaper)
 exec_always waypaper --restore
