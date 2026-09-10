@@ -12,7 +12,6 @@ Includes configs for **sway**, **waybar**, **wofi**, **wlogout**, **Neovim**, **
 ![Vim Visual](screenshots/image-visual.png)
 
 ![Btop](screenshots/image-btop.png)
----
 
 ## What’s inside
 
@@ -48,8 +47,6 @@ Includes configs for **sway**, **waybar**, **wofi**, **wlogout**, **Neovim**, **
 - **bin/** scripts: quick clipboard picker, cheatsheet launcher, clipboard watchers, power sounds.
 
 > See also: [`SECURITY.md`](SECURITY.md) for safety/OPSEC notes before publishing.
-
----
 
 ## Quick start
 
@@ -118,8 +115,6 @@ sudo cp -a lidm-system/etc/lidm.ini /etc/lidm.ini
 - Waybar: it is auto-started by Sway; or `pkill -x waybar; waybar &`
 - Verify: configs are symlinked into `$HOME` (`ls -l ~/.config/...`)
 
----
-
 ## Key pieces
 
 ### Sway
@@ -156,8 +151,6 @@ bindsym $mod+h exec ~/.local/bin/cheatsheets-rofi
 bindsym $mod+c exec ~/.local/bin/clip-pick
 ```
 
----
-
 ## Updating & Uninstalling
 
 - Pull latest changes:
@@ -174,19 +167,13 @@ stow -Dt "$HOME" sway waybar wofi wlogout nvim ranger zsh kitty gtk udiskie syst
 
 - Add new dotfiles: create the same path inside this repo (e.g. `foo/.config/foo/config`), then `stow -vt "$HOME" foo` and commit.
 
----
-
 ## Troubleshooting
 
 - **Stow conflicts**: move existing files away or use `stow --adopt` carefully (then commit the adopted files).
 - **User services don’t start**: `systemctl --user status <name>.service -l`, check that binaries exist and paths in unit files are correct; `systemctl --user daemon-reload` after changes.
 - **Flatpak apps missing in launcher**: ensure `~/.local/share/flatpak/exports/share` and `/var/lib/flatpak/exports/share` are in `XDG_DATA_DIRS` (see `gtk/.config/environment.d/90-flatpak.conf`).
 
----
-
 ## Security
 
 Read [`SECURITY.md`](SECURITY.md). TL;DR: keep secrets out of dotfiles, review `.gitignore`, and consider templating sensitive values.
-
----
 
